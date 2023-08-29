@@ -1,5 +1,6 @@
 package com.example.application.views.main;
 
+import com.example.application.Calculator;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
@@ -12,21 +13,24 @@ import com.vaadin.flow.router.Route;
 @Route(value = "")
 public class MainView extends HorizontalLayout {
 
-    private TextField name;
-    private Button sayHello;
+    private final TextField a, b;
+    private final Button multiply;
+    private final Calculator calculator;
 
     public MainView() {
-        name = new TextField("Your name");
-        sayHello = new Button("Say hello");
-        sayHello.addClickListener(e -> {
-            Notification.show("Hello " + name.getValue());
+        calculator = new Calculator();
+        a = new TextField("Number a");
+        b = new TextField("Number b");
+        multiply = new Button("Multiply");
+        multiply.addClickListener(e -> {
+            Notification.show(calculator.multiply(Integer.parseInt(a.getValue()), Integer.parseInt(b.getValue())) + "");
         });
-        sayHello.addClickShortcut(Key.ENTER);
+        multiply.addClickShortcut(Key.ENTER);
 
         setMargin(true);
-        setVerticalComponentAlignment(Alignment.END, name, sayHello);
+        setVerticalComponentAlignment(Alignment.END, a, b, multiply);
 
-        add(name, sayHello);
+        add(a, b, multiply);
     }
 
 }
