@@ -31,6 +31,11 @@ jobs:
       run: mvn package -Pproduction
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy target/mytodo-1.0-SNAPSHOT.jar
+      run: mvn deploy:deploy-file \
+          -DgroupId=com.example.application \
+          -DartifactId=mytodo \
+          -Dversion=1.0-SNAPSHOT \
+          -Dpackaging=jar \
+          -Dfile=target/mytodo-1.0-SNAPSHOT.jar
       env:
         GITHUB_TOKEN: ${{ github.token }}
