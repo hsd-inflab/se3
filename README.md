@@ -143,6 +143,8 @@ stateDiagram
 
 ### Further steps
 
+- analyze step
+- format step
 - setup versioning strategy
-- use codecov action to compare code/test proportions and report under threshold X
+- use codecov action to compare test/code proportion and report if lower than threshold X
 - use GitHub projects to improve the development process (kanban? scrum?) 
