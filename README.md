@@ -77,7 +77,6 @@ stateDiagram
   state online {
 
     state pr {
-      direction LR
       
       state containerTest {
         direction LR
