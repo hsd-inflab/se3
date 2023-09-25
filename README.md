@@ -47,19 +47,30 @@ graph TD;
 
 ```mermaid
 stateDiagram
-  direction LR
-  local: local
+  local: your computer (local)
+  localMain: mainBranch
+  localFeature: featureXYZBranch
   
-  online: online
-  pr: pull request of feature branch
-  container: container
-
-  [*] --> local
+  online: GitHub (online)
+  pr: pull request of featureXYZBranch
+  onlineMain: mainBranch
+  onlineRelease: releaseBranch
+  containerTest: test
+  containerTestCheckout: checkout
+  containerTestSetup: setup
+  containerTestTest: mvn test
+  containerPackage: package
+  containerPackageCheckout: checkout
+  containerPackageSetup: setup
+  containerPackagePackage: mvn package
+  containerBuildImage: docker build
+  containerBuildImageCheckout: checkout
+  containerBuildImageSetup: setup
 
   state local {
     direction LR
-    main --> feature : branch
-    feature --> commit : new
+    localMain --> localFeature : branch
+    localFeature --> commit : new
   }
   
   local--> online : push
@@ -68,32 +79,34 @@ stateDiagram
     state pr {
       direction LR
       
-      state container {
+      state containerTest {
         direction LR
-        test --> build
-        build --> review
+        containerTestCheckout --> containerTestSetup
+        containerTestSetup --> containerTestTest
       }
-      container --> ready
-    }
-    pr --> buildImage
-    buildImage --> alphaTarget : deploy
+      containerTest --> containerPackage
+      state containerPackage {
+        direction LR
+        containerPackageCheckout --> containerPackageSetup
+        containerPackageSetup --> containerPackagePackage
+      }
+   
+      state containerBuild {
+        direction LR
+        containerBuildImageCheckout --> containerBuildImageSetup
+        containerBuildImageSetup --> containerBuildImage
+      }
+      containerPackage --> containerBuild
+      containerBuild --> alphaTarget : deploy
+    }    
+    pr --> onlineMain : merge
 
-    direction LR
-    
-    pr --> mainBranch : merge
+    onlineMain --> onlineRelease : tag
+
+    state onlineRelease {
+      direction LR
+      buildImage --> productionTarget : release
+    }   
   }
   
-```
-
-```mermaid
-
-
-stateDiagram
-  direction LR
-  state online {
-    direction LR
-    main --> release : tag
-    release --> image : build
-    image --> productionTarget : deploy
-  }
 ```

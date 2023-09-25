@@ -39,3 +39,4 @@ jobs:
       if: steps.checkout.outcome == 'success'
     - name: package
       run: mvn install -Pproduction
+    needs: test
