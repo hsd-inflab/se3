@@ -115,6 +115,7 @@ stateDiagram
 - no deployment on pull request
 - no alpha, beta targets
 - no integration tests
+- main == release
 
 ### Setup
 1) [Install docker](https://www.docker.com/products/docker-desktop/)
@@ -139,3 +140,9 @@ stateDiagram
 9) Check that all status checks are successful
 10) Request review
 11) Await merge
+
+### Further steps
+
+- setup versioning strategy
+- use codecov action to compare code/test proportions and report under threshold X
+- use GitHub projects to improve the development process (kanban? scrum?) 
