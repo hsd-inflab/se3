@@ -102,7 +102,7 @@ stateDiagram
 
     state onlineRelease {
       direction LR
-      buildImage --> productionTarget : release
+      buildImage --> productionTarget : deploy
     }   
   }
   
