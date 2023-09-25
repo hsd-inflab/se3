@@ -58,7 +58,8 @@ stateDiagram
 
   state local {
     direction LR
-    newCommit
+    main --> feature : branch
+    feature --> commit : new
   }
   
   local--> online : push
@@ -74,6 +75,8 @@ stateDiagram
       }
       container --> ready
     }
+    pr --> buildImage
+    buildImage --> alphaTarget : deploy
 
     direction LR
     
@@ -89,8 +92,8 @@ stateDiagram
   direction LR
   state online {
     direction LR
-    main --> release
-    release --> buildImage
-    buildImage --> deploy
+    main --> release : tag
+    release --> image : build
+    image --> productionTarget : deploy
   }
 ```
