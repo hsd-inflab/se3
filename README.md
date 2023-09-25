@@ -133,13 +133,14 @@ stateDiagram
 2) Clone this repository
 3) Create a branch locally
 4) Change code
-5)  Stage your changes
-6) Commit your changes
-7) Publish your branch
-8) Make a pull request
-9) Check that all status checks are successful
-10) Request review
-11) Await merge
+5) Provide a test for a new feature
+6) Stage your changes
+7) Commit your changes
+8) Publish your branch
+9) Make a pull request
+10) Check that all status checks are successful
+11) Request review
+12) Await merge
 
 ### Further steps
 
