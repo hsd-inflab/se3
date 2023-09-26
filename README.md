@@ -43,6 +43,8 @@ graph TD;
 
 ### Where are those things happening?
 
+If no forks are being used, the process can be visualized as this:
+
 ```mermaid
 stateDiagram
   local: your computer (local)
@@ -61,6 +63,7 @@ stateDiagram
   containerPackageCheckout: checkout
   containerPackageSetup: setup
   containerPackagePackage: mvn package
+  containerBuild: build image
   containerBuildImage: docker build
   containerBuildImageCheckout: checkout
   containerBuildImageSetup: setup
@@ -104,6 +107,50 @@ stateDiagram
       direction LR
       buildImage --> productionTarget : deploy
     }   
+  }
+  
+```
+
+If the steps are not dependant to each other, or in any specific order, test, package and build image jobs can also be ran in parallel:
+
+```mermaid
+stateDiagram
+  
+  online: GitHub (online)
+  pr: pull request of featureXYZBranch
+  containerTest: test
+  containerTestCheckout: checkout
+  containerTestSetup: setup
+  containerTestTest: mvn test
+  containerPackage: package
+  containerPackageCheckout: checkout
+  containerPackageSetup: setup
+  containerPackagePackage: mvn package
+  containerBuild: build image
+  containerBuildImage: docker build
+  containerBuildImageCheckout: checkout
+  containerBuildImageSetup: setup
+
+  
+  state online {
+
+    state pr {
+      state containerTest {
+        containerTestCheckout --> containerTestSetup
+        containerTestSetup --> containerTestTest
+      }
+      --
+      state containerPackage {
+        containerPackageCheckout --> containerPackageSetup
+        containerPackageSetup --> containerPackagePackage
+      }
+      --
+      state containerBuild {
+        containerBuildImageCheckout --> containerBuildImageSetup
+        containerBuildImageSetup --> containerBuildImage
+      }      
+    }
+    
   }
   
 ```
