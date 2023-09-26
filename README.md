@@ -124,7 +124,7 @@ Already provided is...
 
 Every commit to the `main` branch will trigger a [GitHub action](https://github.com/features/actions), defined in the [publish.yml](https://github.com/hsd-inflab/se3/blob/main/.github/workflows/publish.yml) workflow file. This action will checkout the source code, install openjdk, test the files in the test directory, create a java archive, create a docker image and deploy it to docker hub:
 
-![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/feichtmeier/hub/main?logo=docker&label=Deployed%20to%20dockerhub)
+![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/feichtmeier/hub/main?logo=docker&label=Deployed%20to%20dockerhub&link=https%3A%2F%2Fhub.docker.com%2Frepository%2Fdocker%2Ffeichtmeier%2Fhub%2Fgeneral)
 
 In every pull request [another GitHub action is triggered](https://github.com/hsd-inflab/se3/blob/main/.github/workflows/CI.yml) which checks out the source code, installs openjdk, tests the files in the test directory and create a java archive.
 If every steps succeeds and the pull request is being marked as approved it is merge-able.
