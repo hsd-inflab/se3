@@ -120,7 +120,7 @@ Already provided is...
 - a working app skeleton
 - CI with [GitHub actions](https://github.com/features/actions)
 
-### Continuous Integration with GitHub Actions
+### Continuous integration and deployment with GitHub Actions
 
 Every commit to the `main` branch will trigger a [GitHub action](https://github.com/features/actions), defined in the [publish.yml](https://github.com/hsd-inflab/se3/blob/main/.github/workflows/publish.yml) workflow file. This action will checkout the source code, install openjdk, test the files in the test directory, create a java archive, create a docker image and deploy it to docker hub:
 
