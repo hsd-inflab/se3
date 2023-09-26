@@ -75,7 +75,7 @@ stateDiagram
   state online {
 
     state pr {
-      
+      newCommit --> containerTest
       state containerTest {
         direction LR
         containerTestCheckout --> containerTestSetup
@@ -110,9 +110,28 @@ stateDiagram
 
 ## Course
 
+In this course you will participate in a team development of a web app made with [Java](https://openjdk.org/) and the [Vaadin Framework](https://vaadin.com/).
+
+<img src=".github/images/start_light.png" alt="drawing" width="300"/>
+
+
+Already provided is...
+
+- a working app skeleton
+- CI with [GitHub actions](https://github.com/features/actions)
+
+### Continuous Integration with GitHub Actions
+
+Every commit to the `main` branch will trigger a [GitHub action](https://github.com/features/actions), defined in the [publish.yml](https://github.com/hsd-inflab/se3/blob/main/.github/workflows/publish.yml) workflow file. This action will checkout the source code, install openjdk, test the files in the test directory, create a java archive, create a docker image and deploy it to docker hub:
+
+![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/feichtmeier/hub/main?logo=docker&label=Deployed%20to%20dockerhub)
+
+In every pull request [another GitHub action is triggered](https://github.com/hsd-inflab/se3/blob/main/.github/workflows/CI.yml) which checks out the source code, installs openjdk, tests the files in the test directory and create a java archive.
+If every steps succeeds and the pull request is being marked as approved it is merge-able.
+
 ### Simplifications
 
-- no deployment on pull request
+- the deployment happens after merge to main, not with every commit in the pull request
 - no alpha, beta targets
 - no integration tests
 - main == release

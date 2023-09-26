@@ -42,6 +42,7 @@ public class AppView extends AppLayout {
 
         addToNavbar(true, viewTabs);
         click(calcTab);
+        getElement().executeJs(JavaScripts.USE_SYSTEM_THEME_SCRIPT);
     }
 
     private Tab createTabAndLinkToView(VerticalLayout view, String tabText) {
