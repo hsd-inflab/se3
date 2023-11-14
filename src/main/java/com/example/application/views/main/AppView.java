@@ -3,7 +3,7 @@ package com.example.application.views.main;
 import java.util.HashMap;
 import java.util.Map;
 
-// import com.example.application.Calculator;
+import com.example.application.Calculator;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.button.Button;
@@ -15,7 +15,6 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.component.combobox.ComboBox;
 
 @PageTitle("App")
 @Route(value = "")
@@ -29,7 +28,7 @@ public class AppView extends AppLayout {
     public AppView() {
         tabToViewMap = new HashMap<>();
 
-        calcTab = createTabAndLinkToView(new CalculatorView(), "Calculator");
+        calcTab = createTabAndLinkToView(new CalcView(), "Calculator");
         settingTab = createTabAndLinkToView(new SettingView(), "Settings");
 
         viewTabs = new Tabs(calcTab, settingTab);
@@ -59,49 +58,26 @@ public class AppView extends AppLayout {
     }
 }
 
-class CalculatorView extends VerticalLayout {
+class CalcView extends VerticalLayout {
     private final TextField textFieldA, textFieldB;
-    private final Button calculateButton;
-    private final ComboBox<String> operationSelect;
+    private final Button multiplyButton;
     private final Calculator calculator;
 
-    public CalculatorView() {
+    public CalcView() {
         calculator = new Calculator();
+        NativeLabel label = new NativeLabel("Multiply");
         textFieldA = new TextField("Number a");
         textFieldB = new TextField("Number b");
-
-        // Dropdown for selecting the operation
-        operationSelect = new ComboBox<>();
-        operationSelect.setItems("Multiply");
-        operationSelect.setValue("Multiply");
-
-        calculateButton = new Button("Calculate");
-        calculateButton.addClickListener(e -> performCalculation());
+        multiplyButton = new Button("Multiply");
+        multiplyButton.addClickListener(e -> {
+            int valueA = Integer.parseInt(textFieldA.getValue());
+            int valueB = Integer.parseInt(textFieldB.getValue());
+            int result = calculator.multiply(valueA, valueB);
+            Notification.show(result + "");
+        });
 
         setMargin(true);
-        add(new NativeLabel("Calculator"), operationSelect, textFieldA, textFieldB, calculateButton);
-    }
-
-    private void performCalculation() {
-        int valueA = Integer.parseInt(textFieldA.getValue());
-        int valueB = Integer.parseInt(textFieldB.getValue());
-        int result = 0;
-        String operation = operationSelect.getValue();
-
-        switch (operation) {
-            case "Multiply":
-                result = calculator.multiply(valueA, valueB);
-                break;
-
-        }
-        Notification.show(result + "");
-    }
-}
-
-// Implement add, subtract, and divide methods in Calculator class
-class Calculator {
-    public int multiply(int a, int b) {
-        return a * b;
+        add(label, textFieldA, textFieldB, multiplyButton);
     }
 }
 
