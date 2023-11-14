@@ -34,7 +34,6 @@ public class AppView extends AppLayout {
         calcTab = createTabAndLinkToView(new CalcView(), "Calculator");
         settingTab = createTabAndLinkToView(new SettingView(), "Settings");
         addTab =createTabAndLinkToView(new AddView(), "Add");
-        viewTabs = new Tabs(calcTab, settingTab,addTab);
 
         exponTab = createTabAndLinkToView(new ExponView(), "Exponential");
 
