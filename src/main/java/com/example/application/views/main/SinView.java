@@ -1,6 +1,5 @@
 package com.example.application.views.main;
 
-import com.example.application.Calculator;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.NativeLabel;
 import com.vaadin.flow.component.notification.Notification;
