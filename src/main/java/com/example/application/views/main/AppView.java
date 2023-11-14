@@ -24,14 +24,16 @@ public class AppView extends AppLayout {
     private final Tabs viewTabs;
     private final Tab calcTab;
     private final Tab settingTab;
+    private final Tab sinTab;
 
     public AppView() {
         tabToViewMap = new HashMap<>();
 
         calcTab = createTabAndLinkToView(new CalcView(), "Calculator");
         settingTab = createTabAndLinkToView(new SettingView(), "Settings");
+        sinTab = createTabAndLinkToView(new SinView(), "Sin");
 
-        viewTabs = new Tabs(calcTab, settingTab);
+        viewTabs = new Tabs(calcTab, settingTab, sinTab);
         viewTabs.setWidthFull();
 
         viewTabs.addSelectedChangeListener(event -> {
