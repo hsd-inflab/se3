@@ -25,6 +25,9 @@ public class AppView extends AppLayout {
     private final Tabs viewTabs;
     private final Tab calcTab;
     private final Tab settingTab;
+    private final Tab sinTab;
+
+    private final Tab addTab;
     private final Tab exponTab;
 
     public AppView() {
@@ -32,9 +35,14 @@ public class AppView extends AppLayout {
 
         calcTab = createTabAndLinkToView(new CalcView(), "Calculator");
         settingTab = createTabAndLinkToView(new SettingView(), "Settings");
+        sinTab = createTabAndLinkToView(new SinView(), "Sin");
+
+        addTab =createTabAndLinkToView(new AddView(), "Add");
+
         exponTab = createTabAndLinkToView(new ExponView(), "Exponential");
 
-        viewTabs = new Tabs(calcTab, settingTab, exponTab);
+        viewTabs = new Tabs(calcTab, settingTab, exponTab, addTab, sinTab);
+
         viewTabs.setWidthFull();
 
         viewTabs.addSelectedChangeListener(event -> {
@@ -75,6 +83,7 @@ class CalcView extends VerticalLayout {
         multiplyButton.addClickListener(e -> {
             double valueA = Double.parseDouble(textFieldA.getValue().replaceAll("\\s+",""));
             double valueB = Double.parseDouble(textFieldB.getValue().replaceAll("\\s+",""));
+
             double result = calculator.multiply(valueA, valueB);
             Notification.show(result + "");
         });
