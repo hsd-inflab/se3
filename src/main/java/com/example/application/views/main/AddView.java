@@ -1,6 +1,18 @@
 package com.example.application.views.main;
 
-class AddView extends VerticalLayout {
+import com.example.application.Calculator;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.NativeLabel;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+
+
+
+
+
+
+public class AddView extends VerticalLayout {
     private final TextField textFieldA, textFieldB;
     private final Button addButton;
     private final Calculator calculator;
@@ -20,6 +32,6 @@ class AddView extends VerticalLayout {
         });
 
         setMargin(true);
-        add(label,textFieldA, textFieldB, addButtonButton);
+        add(label,textFieldA, textFieldB, addButton);
     }
 }
