@@ -73,9 +73,9 @@ class CalcView extends VerticalLayout {
         textFieldB = new TextField("Number b");
         multiplyButton = new Button("Multiply");
         multiplyButton.addClickListener(e -> {
-            int valueA = Integer.parseInt(textFieldA.getValue());
-            int valueB = Integer.parseInt(textFieldB.getValue());
-            int result = calculator.multiply(valueA, valueB);
+            double valueA = Double.parseDouble(textFieldA.getValue());
+            double valueB = Double.parseDouble(textFieldB.getValue());
+            double result = calculator.multiply(valueA, valueB);
             Notification.show(result + "");
         });
 
