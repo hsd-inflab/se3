@@ -3,6 +3,7 @@ package com.example.application.views.main;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.application.Exponential;
 import com.example.application.Calculator;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -25,6 +26,7 @@ public class AppView extends AppLayout {
     private final Tab calcTab;
     private final Tab settingTab;
     private final Tab addTab;
+    private final Tab exponTab;
 
     public AppView() {
         tabToViewMap = new HashMap<>();
@@ -33,6 +35,11 @@ public class AppView extends AppLayout {
         settingTab = createTabAndLinkToView(new SettingView(), "Settings");
         addTab =createTabAndLinkToView(new AddView(), "Add");
         viewTabs = new Tabs(calcTab, settingTab,addTab);
+
+        exponTab = createTabAndLinkToView(new ExponView(), "Exponential");
+
+        viewTabs = new Tabs(calcTab, settingTab, exponTab, addTab);
+
         viewTabs.setWidthFull();
 
         viewTabs.addSelectedChangeListener(event -> {
@@ -71,14 +78,35 @@ class CalcView extends VerticalLayout {
         textFieldB = new TextField("Number b");
         multiplyButton = new Button("Multiply");
         multiplyButton.addClickListener(e -> {
-            int valueA = Integer.parseInt(textFieldA.getValue());
-            int valueB = Integer.parseInt(textFieldB.getValue());
-            int result = calculator.multiply(valueA, valueB);
+            double valueA = Double.parseDouble(textFieldA.getValue());
+            double valueB = Double.parseDouble(textFieldB.getValue());
+            double result = calculator.multiply(valueA, valueB);
             Notification.show(result + "");
         });
 
         setMargin(true);
         add(label,textFieldA, textFieldB, multiplyButton);
+    }
+}
+
+class ExponView extends VerticalLayout {
+    private final TextField textFieldA;
+    private final Button expButton;
+    private final Exponential exponential;
+
+    public ExponView() {
+        exponential = new Exponential();
+        NativeLabel label = new NativeLabel("Calculate Exponential");
+        textFieldA = new TextField("Number x");
+        expButton = new Button("get result");
+        expButton.addClickListener(e -> {
+            double valueX = Double.parseDouble(textFieldA.getValue());
+            double result = exponential.exponential(valueX);
+            Notification.show(result + "");
+        });
+
+        setMargin(true);
+        add(label,textFieldA, expButton);
     }
 }
 
