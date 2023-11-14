@@ -3,6 +3,7 @@ package com.example.application.views.main;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.application.Exponential;
 import com.example.application.Calculator;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -24,14 +25,16 @@ public class AppView extends AppLayout {
     private final Tabs viewTabs;
     private final Tab calcTab;
     private final Tab settingTab;
+    private final Tab exponTab;
 
     public AppView() {
         tabToViewMap = new HashMap<>();
 
         calcTab = createTabAndLinkToView(new CalcView(), "Calculator");
         settingTab = createTabAndLinkToView(new SettingView(), "Settings");
+        exponTab = createTabAndLinkToView(new ExponView(), "Exponential");
 
-        viewTabs = new Tabs(calcTab, settingTab);
+        viewTabs = new Tabs(calcTab, settingTab, exponTab);
         viewTabs.setWidthFull();
 
         viewTabs.addSelectedChangeListener(event -> {
@@ -78,6 +81,27 @@ class CalcView extends VerticalLayout {
 
         setMargin(true);
         add(label,textFieldA, textFieldB, multiplyButton);
+    }
+}
+
+class ExponView extends VerticalLayout {
+    private final TextField textFieldA;
+    private final Button expButton;
+    private final Exponential exponential;
+
+    public ExponView() {
+        exponential = new Exponential();
+        NativeLabel label = new NativeLabel("Calculate Exponential");
+        textFieldA = new TextField("Number x");
+        expButton = new Button("get result");
+        expButton.addClickListener(e -> {
+            double valueX = Double.parseDouble(textFieldA.getValue());
+            double result = exponential.exponential(valueX);
+            Notification.show(result + "");
+        });
+
+        setMargin(true);
+        add(label,textFieldA, expButton);
     }
 }
 
