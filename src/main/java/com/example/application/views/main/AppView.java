@@ -82,7 +82,7 @@ class CalcView extends VerticalLayout {
 }
 
 class SettingView extends VerticalLayout {
-    private static final String SETTINGS = "Settings";
+    private static final String SETTINGS = "settings";
 
     public SettingView() {
         add(SETTINGS);
