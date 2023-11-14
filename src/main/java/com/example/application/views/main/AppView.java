@@ -25,6 +25,7 @@ public class AppView extends AppLayout {
     private final Tabs viewTabs;
     private final Tab calcTab;
     private final Tab settingTab;
+    private final Tab addTab;
     private final Tab exponTab;
 
     public AppView() {
@@ -32,9 +33,12 @@ public class AppView extends AppLayout {
 
         calcTab = createTabAndLinkToView(new CalcView(), "Calculator");
         settingTab = createTabAndLinkToView(new SettingView(), "Settings");
+        addTab =createTabAndLinkToView(new AddView(), "Add");
+
         exponTab = createTabAndLinkToView(new ExponView(), "Exponential");
 
-        viewTabs = new Tabs(calcTab, settingTab, exponTab);
+        viewTabs = new Tabs(calcTab, settingTab, exponTab, addTab);
+
         viewTabs.setWidthFull();
 
         viewTabs.addSelectedChangeListener(event -> {
