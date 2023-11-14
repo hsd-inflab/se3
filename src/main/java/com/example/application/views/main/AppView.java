@@ -25,6 +25,8 @@ public class AppView extends AppLayout {
     private final Tabs viewTabs;
     private final Tab calcTab;
     private final Tab settingTab;
+    private final Tab sinTab;
+
     private final Tab addTab;
     private final Tab exponTab;
 
@@ -33,11 +35,13 @@ public class AppView extends AppLayout {
 
         calcTab = createTabAndLinkToView(new CalcView(), "Calculator");
         settingTab = createTabAndLinkToView(new SettingView(), "Settings");
+        sinTab = createTabAndLinkToView(new SinView(), "Sin");
+
         addTab =createTabAndLinkToView(new AddView(), "Add");
 
         exponTab = createTabAndLinkToView(new ExponView(), "Exponential");
 
-        viewTabs = new Tabs(calcTab, settingTab, exponTab, addTab);
+        viewTabs = new Tabs(calcTab, settingTab, exponTab, addTab, sinTab);
 
         viewTabs.setWidthFull();
 
